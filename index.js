@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use("/api/shipping", shippingRoutes.js)
+app.use("/api/shipping", shippingRoutes)
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,17 +1,17 @@
 const express = require('express');
 const {
   createShipping,
-  getShipping,
-  cancelShipping
+  getShipping
+//   cancelShipping
 } = require('../controllers/shippingControllers');
-const authMiddleware = require('../middleware/authMiddleware');
+const verifySecret = require('../middleware/verifySecret');
 
 const router = express.Router();
 
-router.use(authMiddleware);
+router.use(verifySecret);
 
 router.post('/create', createShipping);
 router.get('/get', getShipping);
-router.put('/cancel', cancelShipping);
+// router.put('/cancel', cancelShipping);
 
 module.exports = router;
