@@ -1,14 +1,23 @@
-const API_AUTH_KEY="a1b2c3d4e5f67890123456789abcdef"
 
-const verifySecret = (req, res, next) =>{
-    const apiauthkey = req.headers['apiauthkey'];
-    if(!apiauthkey){
-        return res.status(403).json({message:'SHIPPING_SECRET_KEY is missing or invalid'})
-    }
-    if(apiauthkey!==API_AUTH_KEY){
-        return res.status(403).json({message:'Failed to authenticate SHIPPING_SECRET_KEY'})
-    }
-    next()
-}
+// const verifySecret = (req, res, next) =>{
+//     const secretKey = req.headers['SHIPPING_SECRET_KEY'];
+//     if(!secretKey){
+//         return res.status(403).json({message:'SHIPPING_SECRET_KEY is missing or invalid'})
+//     }
+//     if(secretKey!==process.env.SHIPPING_SECRET_KEY){
+//         return res.status(403).json({message:'Failed to authenticate SHIPPING_SECRET_KEY'})
+//     }
+//     next()
+// }
 
-module.exports=verifySecret;
+// module.exports=verifySecret;
+
+const verifySecret = (req, res, next) => {
+    const secretKey = req.header('SHIPPING_SECRET_KEY')
+    if (!secretKey || secretKey !== process.env.SHIPPING_SECRET_KEY) {
+      return res.status(403).json({ error: 'SHIPPING_SECRET_KEY is missing or invalid' });
+    }
+    next();
+  };
+  
+  module.exports = verifySecret;
