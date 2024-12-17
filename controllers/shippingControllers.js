@@ -7,7 +7,7 @@ const createShipping = async (req, res) => {
     return res.status(404).json({ error: 'All fields required' });
   }
   const shippingRecord = await prisma.shipping.create({
-    data: { userId, productId, count, status: 'pending' },
+    data: { userId, productId, count},
   });
   res.status(201).json(shippingRecord);
 };
